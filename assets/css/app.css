@@ -118,3 +118,18 @@
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+
+
+.post { 
+  border: 1px solid #ccc;
+  padding: 1em; 
+  margin-top: 1em; 
+}
+
+.post-avatar { 
+  display: block; 
+  height: 3em; 
+  width: 3em; 
+  background: #ccc; 
+}
