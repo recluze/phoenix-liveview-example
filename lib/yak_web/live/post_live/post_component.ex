@@ -18,7 +18,9 @@ defmodule YakWeb.PostLive.PostComponent do
       <div class="row">
       <div class="column-50 column"></div>
         <div class="column">
+          <a href="#" phx-click="like" phx-target={@myself}>
             <i class="far fa-heart"></i> <%= @post.likes_count %>
+          </a>
         </div>
         <div class="column">
             <i class="far fa-retweet"></i> <%= @post.reposts_count %>
@@ -36,5 +38,11 @@ defmodule YakWeb.PostLive.PostComponent do
 
     </div>
     """
+  end
+
+
+  def handle_event("like", _, socket) do
+    Yak.Timeline.inc_likes(socket.assigns.post)
+    {:noreply, socket}  # updates will be handled by existing infrastructure
   end
 end
