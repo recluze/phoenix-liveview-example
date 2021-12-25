@@ -6,6 +6,7 @@ defmodule YakWeb.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+      if connected?(socket), do: Timeline.subscribe()
     {:ok, assign(socket, :posts, list_posts())}
   end
 
@@ -42,5 +43,11 @@ defmodule YakWeb.PostLive.Index do
 
   defp list_posts do
     Timeline.list_posts()
+  end
+
+
+  @impl true
+  def handle_info({:post_created, post}, socket) do
+    {:noreply, update(socket, :posts, fn posts -> [post | posts ] end)}
   end
 end
