@@ -89,6 +89,7 @@ defmodule Yak.Timeline do
   """
   def delete_post(%Post{} = post) do
     Repo.delete(post)
+    broadcast({:ok, nil}, :post_deleted)  # for delete
   end
 
   @doc """
